@@ -12,13 +12,13 @@ Platform assembly: D:\aschaffland\MasterarbeitUnity3D\oculusAndSensAbleDemo_Data
 Loading D:\aschaffland\MasterarbeitUnity3D\oculusAndSensAbleDemo_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\oculusAndSensAbleDemo_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\aschaffland\MasterarbeitUnity3D\oculusAndSensAbleDemo_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.057 seconds
+- Completed reload, in  0.056 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 2560x1440 59Hz; virtual: 4480x1440 at 0,0
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\oculusAndSensAbleDemo_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\oculusAndSensAbleDemo_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 0.869569 ms
+UnloadTime: 0.891807 ms
 The referenced script on this Behaviour is missing!
  
 (Filename:  Line: 1771)

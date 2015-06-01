@@ -25,7 +25,7 @@ public class SphereMovement : MonoBehaviour {
 	private List<Vector3> positions;
 
 	// Use this for initialization
-	void Start () 
+	void  Awake() 
 	{
 		windSpeed = WindSpeed.Instance;
 		trials = Trials.Instance;
@@ -102,6 +102,7 @@ public class SphereMovement : MonoBehaviour {
 				sphere.transform.position = startPosition;
 				sphere.renderer.enabled = true;
 				sphere.rigidbody.useGravity = false;
+
 				if (trials.currentTrial.type == Trials.typeOfTrial.INTRO || trials.currentTrial.type == Trials.typeOfTrial.TRAINING)
 				{
 					arrow.renderer.enabled = true;
