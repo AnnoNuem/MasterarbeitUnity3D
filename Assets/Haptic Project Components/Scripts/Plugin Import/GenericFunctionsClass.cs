@@ -41,7 +41,10 @@ public class GenericFunctionsClass : MonoBehaviour {
 	
 	/*************************************************************/
 	
-
+	public double[] getProxyPosition()
+	{
+		return this.myProxyPosition;
+	}
 
 	// Use this for initialization
 	void Awake () {

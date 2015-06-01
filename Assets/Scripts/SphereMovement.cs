@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public class SphereMovement : MonoBehaviour {
 
-	Vector3 startPosition = Vector3.up;
+	Vector3 startPosition; 
 	public Vector3 dropPosition;
 	public GameObject sphere;
 	public GameObject helper;
-	public GameObject arrow;
+	public GameObject ground;
 	public GameObject goal;
 	public WindSpeed windSpeed;
 	public Trials trials;
@@ -33,6 +33,12 @@ public class SphereMovement : MonoBehaviour {
 		positions = new List<Vector3>();
 	}
 
+	void Start()
+	{
+		startPosition = new Vector3(0,Parameters.startPositionHeight,0);
+		Debug.Log(startPosition);
+	}
+
 	void FixedUpdate()
 	{
 		if (state == sphereStates.DROPPING)
@@ -46,6 +52,8 @@ public class SphereMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+//		Debug.Log(sphere.collider.gameObject);
+
 //		Debug.Log (state);
 		switch (state)
 		{
@@ -54,7 +62,6 @@ public class SphereMovement : MonoBehaviour {
 			float x = Input.GetAxis ("L_XAxis_1"); 
 			float z = -Input.GetAxis ("L_YAxis_1");
 			Vector3 v = sphere.transform.position;
-			v.x = v.x + x * Parameters.moveSpeed;
 			if ( v.x < -Parameters.fieldSizeX )
 			{
 				v.x = -Parameters.fieldSizeX;
@@ -63,7 +70,6 @@ public class SphereMovement : MonoBehaviour {
 			{
 				v.x = Parameters.fieldSizeX;
 			}
-			v.z = v.z + z * Parameters.moveSpeed;
 			if ( v.z < -Parameters.fieldSizeZ )
 			{
 				v.z = -Parameters.fieldSizeZ;
@@ -73,11 +79,6 @@ public class SphereMovement : MonoBehaviour {
 				v.z = Parameters.fieldSizeZ;
 			}
 			sphere.transform.position = v;
-			if (Input.GetButtonDown("A_1"))
-			{
-				SwitchState(sphereStates.DROPPING);
-			}
-
 			break;
 		}
 	}
@@ -89,31 +90,28 @@ public class SphereMovement : MonoBehaviour {
 		{
 			case sphereStates.DROPPING:
 				dropPosition =sphere.transform.position;
-				arrow.renderer.enabled = false;
 				sphere.rigidbody.useGravity = true;
+				sphere.rigidbody.isKinematic = false;
 				sphere.renderer.enabled = true;
 				break;
 			case sphereStates.HIDDEN:
-				arrow.renderer.enabled = false;
 				sphere.renderer.enabled = false;
 				sphere.rigidbody.useGravity = false;
+				sphere.rigidbody.isKinematic = false;
 				break;
 			case sphereStates.MOVING:
 				sphere.transform.position = startPosition;
 				sphere.renderer.enabled = true;
 				sphere.rigidbody.useGravity = false;
-
-				if (trials.currentTrial.type == Trials.typeOfTrial.INTRO || trials.currentTrial.type == Trials.typeOfTrial.TRAINING)
-				{
-					arrow.renderer.enabled = true;
-				}
+				sphere.rigidbody.isKinematic = true;
 				break;
 		}
 	}
 
 	IEnumerator OnCollisionEnter(Collision col)
 	{	
-		if (state != sphereStates.COLLIDED)
+		Debug.Log(col.gameObject.ToString());
+		if (state == sphereStates.DROPPING && col.gameObject == ground)
 		{
 			statistics.computeTrialStatistics(dropPosition, sphere.transform.position, goal.transform.position, positions);
 			positions.Clear();

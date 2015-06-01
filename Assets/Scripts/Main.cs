@@ -4,7 +4,6 @@ using System.Collections;
 public class Main : MonoBehaviour {
 	
 	public GameObject sphere;
-	public GameObject arrow;
 	public GameObject helper;
 	public GameObject goal;
 	public GameObject ground;
@@ -53,7 +52,6 @@ public class Main : MonoBehaviour {
 		{
 		case states.PAUSE:
 			startscreen.enabled = false;
-			arrow.renderer.enabled = false;
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = true;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
@@ -67,14 +65,12 @@ public class Main : MonoBehaviour {
 		case states.STARTSCREEN:
 			Debug.Log("Startscreen");
 			startscreen.enabled = true;
-			arrow.renderer.enabled = false;
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = false;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
 			break;
 		case states.TESTING:
 			startscreen.enabled = false;
-			arrow.renderer.enabled = false;
 			goal.renderer.enabled = true;
 			ground.renderer.enabled = true;
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
@@ -87,7 +83,6 @@ public class Main : MonoBehaviour {
 			break;
 		case states.END:
 			startscreen.enabled = false;
-			arrow.renderer.enabled = false;
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = false;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);

@@ -9,8 +9,18 @@ public class Haptics : HapticClassScript {
 
 	//Generic Haptic Functions
 	private GenericFunctionsClass myGenericFunctionsClassScript;
-	
 
+	public SphereMovement sm;
+	public Main main;
+	public GameObject sphere;
+	public WindSpeed ws;
+	public string Type;
+	public int effect_index;
+	public float gain;
+	public float magnitude;
+	public float duration;
+	public float frequency;
+	
 	/*****************************************************************************/
 	
 	void Awake()
@@ -21,7 +31,7 @@ public class Haptics : HapticClassScript {
 
 	void Start()
 	{
-
+		ws = WindSpeed.Instance;
 		if(PluginImport.InitHapticDevice())
 		{
 			Debug.Log("OpenGL Context Launched");
@@ -55,10 +65,10 @@ public class Haptics : HapticClassScript {
 		//Set Environmental Haptic Effect
 		/***************************************************************/
 			// Viscous Force Example
-			myGenericFunctionsClassScript.SetEnvironmentViscosity ();
+			//myGenericFunctionsClassScript.SetEnvironmentViscosity ();
 
 			// Constant Force Example - We use this environmental force effect to simulate the weight of the cursor
-			myGenericFunctionsClassScript.SetEnvironmentConstantForce();
+
 
 			// Friction Force Example
 			//myGenericFunctionsClassScript.SetEnvironmentFriction();
@@ -85,6 +95,24 @@ public class Haptics : HapticClassScript {
 
 	void Update()
 	{
+		if (main.state == Main.states.INTRO || main.state == Main.states.TRAINING)
+		{
+			double[] _temp = myGenericFunctionsClassScript.getProxyPosition();
+			Vector3 position = new Vector3((float)_temp[0],(float)_temp[1],(float)_temp[2]);
+			Vector2 force = ws.ComputeWindForce(position);
+			//convert String to IntPtr
+			IntPtr type = ConverterClass.ConvertStringToByteToIntPtr("const");
+			//Convert float[3] to intptr
+			float[] _temp2 = {0f,0f,0f};
+			IntPtr p = ConverterClass.ConvertFloat3ToIntPtr(_temp2);
+			//Convert float[3] to intptr
+			float[] _temp3 = {force.x, 0, force.y};
+			IntPtr direction = ConverterClass.ConvertFloat3ToIntPtr(_temp3);
+
+			//PluginImport.SetEffect(type , effect_index, gain, magnitude, duration, frequency, p, direction);
+			//PluginImport.StartEffect(effect_index);
+		}
+
 
 		/***************************************************************/
 		//Act on the rigid body of the Manipulated object
@@ -161,15 +189,8 @@ public class Haptics : HapticClassScript {
 		else if (previousButtonState && !PluginImport.GetButton1State())
 		{
 			//If the object is dropped, the grabity is enabled again and kinematic is deactivated
-			if(!grabbedObjectName.Equals("")){
-				grabbedObject = GameObject.Find(grabbedObjectName);
-				
-				//If there is a rigid body
-				if(grabbedObject.rigidbody != null)
-				{
-					grabbedObject.rigidbody.isKinematic=false;
-					grabbedObject.rigidbody.useGravity=true;
-				}
+			if(grabbedObjectName.Equals("Sphere")){
+				sm.SwitchState(SphereMovement.sphereStates.DROPPING);
 				grabbedObjectName = "";
 			}
 			previousButtonState = false;

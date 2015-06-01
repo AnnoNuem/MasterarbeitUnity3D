@@ -18,15 +18,19 @@ Platform assembly: D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alp
 Loading D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alpha001_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alpha001_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alpha001_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.062 seconds
+- Completed reload, in  0.065 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 2560x1440 59Hz; virtual: 4480x1440 at 0,0
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alpha001_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alpha001_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 0.873415 ms
+UnloadTime: 0.851601 ms
 WARNING: Shader Unsupported: 'Reflective/VertexLit' - Pass 'BASE' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
+(0.0, 3.4, 0.0)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 56)
+
 Startscreen
  
 (Filename: C:/buildslave/unity/build/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 56)
@@ -38,12 +42,6 @@ OpenGL Context Launched
 Haptic Device Launched
  
 (Filename: C:/buildslave/unity/build/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 56)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at GenericFunctionsClass.SetHapticGeometry () [0x00000] in <filename unknown>:0 
-  at Haptics.Start () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
 
 Platform assembly: D:\aschaffland\MasterarbeitUnity3D\CenterOut3Daschaffland_alpha001_Data\Managed\Boo.Lang.dll (this message is harmless)
 Haptic Context CleanUp
