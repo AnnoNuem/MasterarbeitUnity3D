@@ -47,18 +47,18 @@ public sealed class Trials
 	{
 		trialQueue = new Queue();	
 		logger = Logger.Instance;
-		introPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantIntro),0.0001f, (float)Math.Sin(radiantIntro)),
-			new Vector3(-(float)Math.Cos(radiantIntro),0.0001f, -(float)Math.Sin(radiantIntro)),
-			new Vector3((float)Math.Sin(radiantIntro),0.0001f, (float)Math.Cos(radiantIntro)),
-			new Vector3(-(float)Math.Sin(radiantIntro),0.0001f, -(float)Math.Cos(radiantIntro))};
-		trainingPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantTraining),0.0001f, (float)Math.Sin(radiantTraining)),
-			new Vector3(-(float)Math.Cos(radiantTraining),0.0001f, -(float)Math.Sin(radiantTraining)),
-			new Vector3((float)Math.Sin(radiantTraining),0.0001f, (float)Math.Cos(radiantTraining)),
-			new Vector3(-(float)Math.Sin(radiantTraining),0.0001f, -(float)Math.Cos(radiantTraining))};
-		testingPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantTesting),0.0001f, (float)Math.Sin(radiantTesting)),
-			new Vector3(-(float)Math.Cos(radiantTesting),0.0001f, -(float)Math.Sin(radiantTesting)),
-			new Vector3((float)Math.Sin(radiantTesting),0.0001f, (float)Math.Cos(radiantTesting)),
-			new Vector3(-(float)Math.Sin(radiantTesting),0.0001f, -(float)Math.Cos(radiantTesting))};
+		introPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantIntro)*Parameters.goal_scale),
+			new Vector3(-(float)Math.Cos(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Sin(radiantIntro)*Parameters.goal_scale),
+			new Vector3((float)Math.Sin(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Cos(radiantIntro)*Parameters.goal_scale),
+			new Vector3(-(float)Math.Sin(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Cos(radiantIntro)*Parameters.goal_scale)};
+		trainingPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTraining)*Parameters.goal_scale),
+			new Vector3(-(float)Math.Cos(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Sin(radiantTraining)*Parameters.goal_scale),
+			new Vector3((float)Math.Sin(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Cos(radiantTraining)*Parameters.goal_scale),
+			new Vector3(-(float)Math.Sin(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Cos(radiantTraining)*Parameters.goal_scale)};
+		testingPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTesting)*Parameters.goal_scale),
+			new Vector3(-(float)Math.Cos(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Sin(radiantTesting)*Parameters.goal_scale),
+			new Vector3((float)Math.Sin(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Cos(radiantTesting)*Parameters.goal_scale),
+			new Vector3(-(float)Math.Sin(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Cos(radiantTesting)*Parameters.goal_scale)};
 	}
 	
 	public static Trials Instance

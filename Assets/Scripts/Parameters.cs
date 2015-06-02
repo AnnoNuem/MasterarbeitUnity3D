@@ -9,6 +9,11 @@
 	public const int numberOfTrainingTrials = 2;
 	public const int numberOfTestingTrials = 2;
 
+
+	//parameters goal
+	public const float goal_height = 2.89f;
+	public const float goal_scale = 0.4f;
+
 	// start position of ball
 	public const float startPositionHeight = 3.38f;
 
