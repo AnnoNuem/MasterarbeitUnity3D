@@ -110,7 +110,6 @@ public class SphereMovement : MonoBehaviour {
 
 	IEnumerator OnCollisionEnter(Collision col)
 	{	
-		Debug.Log(col.gameObject.ToString());
 		if (state == sphereStates.DROPPING && col.gameObject == ground)
 		{
 			statistics.computeTrialStatistics(dropPosition, sphere.transform.position, goal.transform.position, positions);

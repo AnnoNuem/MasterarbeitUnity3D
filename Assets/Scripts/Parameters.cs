@@ -1,8 +1,8 @@
 ﻿public static class Parameters
 {
 	//fieldsize limitin area of movement and used for wind computation
-	public const int fieldSizeX = 2;
-	public const int fieldSizeZ = 2;
+	public const float fieldSizeX = 0.8f;
+	public const float fieldSizeZ = 0.8f;
 
 	//number of trials
 	public const int numberOfIntroTrials = 2;
@@ -21,7 +21,7 @@
 	public const float xscale = 0.0f;
 	public const float zscale = 1f;
 	public const float xbias = 0.0f;
-	public const float zbias = 0.1f;
+	public const float zbias = 0.8f;
 
 	//how long should the sphere laying on the floor been displayed
 	public const float dispayOfHit = 0.7f;

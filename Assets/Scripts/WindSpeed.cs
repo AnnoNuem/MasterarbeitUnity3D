@@ -24,30 +24,32 @@ public sealed class WindSpeed
 			return instance;
 		}
 	}
-	private Vector2 GetXY(Vector3 position)
+	private float[] GetXY(Vector3 position)
 	{
-		float x = (position[0] + Parameters.fieldSizeX ) * Parameters.xscale + Parameters.xbias;
-		float z = (position[2] + Parameters.fieldSizeZ ) * Parameters.zscale + Parameters.zbias;
-		return new Vector2(x,z);
+		float x = (position[0] / (Parameters.fieldSizeX * 2f) + Parameters.fieldSizeX/2f) * Parameters.xscale;
+		float z = (position[2] / (Parameters.fieldSizeZ * 2f) + Parameters.fieldSizeZ/2f) * Parameters.zscale;
+		float[] a = {x,z};
+		return a;
 	}
 
 	//compute wind forces in x and z direction at given cordinate
 	public Vector2 ComputeWindForce(Vector3 position)
 	{
-			return GetXY(position);
+		float[] a = GetXY(position);
+		return new Vector2(a[0],a[1]);
 	}
 
 	public float ComputeWindDirection(Vector3 position)
 	{
-		Vector2 v = GetXY(position);
-		float hypo = (float)Math.Sqrt(v.x * v.x + v.y * v.y);
-		float direction = (float) Math.Asin(v.y/hypo);
+		float[] a = GetXY(position);
+		float hypo = (float)Math.Sqrt(a[0] * a[0] + a[1] * a[1]);
+		float direction = (float) Math.Asin(a[1]/hypo);
 		return  (float)(-direction * (180.0 / Math.PI) - 90);
 	}
 
 	public float ComputeWindSpeed(Vector3 position)
 	{
-		Vector2 v = GetXY(position);
-		return (float) Math.Sqrt(v.x*v.x+v.y*v.y);
+		float[] a = GetXY(position);
+		return (float) Math.Sqrt(a[0] * a[0] + a[1] * a[1]);
 	}
 }

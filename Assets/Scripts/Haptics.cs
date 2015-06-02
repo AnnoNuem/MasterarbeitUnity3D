@@ -21,6 +21,10 @@ public class Haptics : HapticClassScript {
 	public float[] directionArray = new float[3];
 	public float duration;
 	public float frequency;
+
+	//number of bins of different constant wind forces
+	public const uint wind_bins = 100;
+
 	
 	/*****************************************************************************/
 	
@@ -70,10 +74,9 @@ public class Haptics : HapticClassScript {
 		float[] positionArray = {0f,0f,0f};
 		IntPtr positionPtr = ConverterClass.ConvertFloat3ToIntPtr(positionArray);
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < wind_bins; i++)
 		{
-			magnitude = ((float)i)/10;
-			Debug.Log (direction.x + " " + direction.y);
+			magnitude = ((float)i)/wind_bins;
 			PluginImport.SetEffect(type , i, gain, magnitude, duration, frequency, positionPtr, directionPtr);
 		}
 
@@ -89,12 +92,19 @@ public class Haptics : HapticClassScript {
 	{
 		if (sphere_grabbed && (main.state == Main.states.INTRO || main.state == Main.states.TRAINING))
 		{
-			if (active_event_id != -1)
+			int old_active_event_id = active_event_id;
+			float windSpeed = ws.ComputeWindSpeed(sphere.transform.position);
+			active_event_id = (int) (windSpeed * wind_bins);
+			Debug.Log(active_event_id);	
+
+			if (active_event_id != old_active_event_id)
 			{
-				PluginImport.StopEffect(active_event_id);
+				if (old_active_event_id != -1)
+				{
+					PluginImport.StopEffect(old_active_event_id);
+				}
+				PluginImport.StartEffect(active_event_id);
 			}
-			active_event_id = 2;
-			PluginImport.StartEffect(active_event_id);
 		}
 		else if(active_event_id != -1)
 		{

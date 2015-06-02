@@ -4,12 +4,15 @@ Prename: NA
 Age: 0
 Gender: NA
 participantID: NA
-DateTime: 6/2/2015 2:07:20 PM
+DateTime: 6/2/2015 5:44:20 PM
 
-6/2/2015 2:07:20 PM Trial List Created
+6/2/2015 5:44:20 PM Trial List Created
 Number of IntroTrials: 2
 Number of TrainingTrials: 2
 Number of Testing Trials: 2
 
-6/2/2015 2:07:20 PM New Block of INTRO trials.
-6/2/2015 2:07:20 PM New INTRO trial.
+6/2/2015 5:44:20 PM New Block of INTRO trials.
+6/2/2015 5:44:20 PM New INTRO trial.
+Accuracy: 0.1924308
+Variance: 0.08857036
+6/2/2015 5:44:42 PM New INTRO trial.
