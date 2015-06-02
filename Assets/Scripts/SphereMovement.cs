@@ -36,7 +36,7 @@ public class SphereMovement : MonoBehaviour {
 	void Start()
 	{
 		startPosition = new Vector3(0,Parameters.startPositionHeight,0);
-		Debug.Log(startPosition);
+		sphere.transform.position = startPosition;
 	}
 
 	void FixedUpdate()
