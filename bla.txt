@@ -4,15 +4,44 @@ Prename: NA
 Age: 0
 Gender: NA
 participantID: NA
-DateTime: 6/2/2015 5:44:20 PM
+DateTime: 6/2/2015 6:40:11 PM
 
-6/2/2015 5:44:20 PM Trial List Created
+6/2/2015 6:40:11 PM Trial List Created
 Number of IntroTrials: 2
 Number of TrainingTrials: 2
 Number of Testing Trials: 2
 
-6/2/2015 5:44:20 PM New Block of INTRO trials.
-6/2/2015 5:44:20 PM New INTRO trial.
-Accuracy: 0.1924308
-Variance: 0.08857036
-6/2/2015 5:44:42 PM New INTRO trial.
+6/2/2015 6:40:11 PM New Block of INTRO trials.
+6/2/2015 6:40:11 PM New INTRO trial.
+Accuracy: 0.1219624
+Variance: 0.02283799
+6/2/2015 6:40:27 PM New INTRO trial.
+Accuracy: 0.3521436
+Variance: 0.09596775
+6/2/2015 6:40:51 PM New INTRO trial.
+Accuracy: 0.01448075
+Variance: 0.004776031
+Block Accuracy: 0.1628622
+Block Variance: 0.04119392
+
+6/2/2015 6:40:59 PM New Block of TRAINING trials.
+6/2/2015 6:40:59 PM New TRAINING trial.
+Accuracy: 0.01346117
+Variance: 0.1062691
+6/2/2015 6:41:08 PM New TRAINING trial.
+Accuracy: 0.01339172
+Variance: 0.0181121
+Block Accuracy: 0.01342645
+Block Variance: 0.06219059
+
+6/2/2015 6:41:14 PM New Block of TESTING trials.
+6/2/2015 6:41:14 PM New TESTING trial.
+Accuracy: 0.003549814
+Variance: 0.005142747
+6/2/2015 6:41:20 PM New TESTING trial.
+Accuracy: 0.02537505
+Variance: 0.02518673
+Block Accuracy: 0.01446243
+Block Variance: 0.01516474
+
+6/2/2015 6:41:25 PM Experimend ended
