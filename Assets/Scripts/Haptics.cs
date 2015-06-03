@@ -39,8 +39,8 @@ public class Haptics : HapticClassScript {
 		ws = WindSpeed.Instance;
 		if(PluginImport.InitHapticDevice())
 		{
-			Debug.Log("OpenGL Context Launched");
-			Debug.Log("Haptic Device Launched");
+		//	Debug.Log("OpenGL Context Launched");
+		//	Debug.Log("Haptic Device Launched");
 			
 			myGenericFunctionsClassScript.SetHapticWorkSpace();
 			myGenericFunctionsClassScript.GetHapticWorkSpace();
@@ -67,8 +67,8 @@ public class Haptics : HapticClassScript {
 		// asuming that the wind is linear
 		Vector2 direction = ws.ComputeWindForce(sphere.transform.position);
 		direction.Normalize();
-		directionArray[0] = direction.x;
-		directionArray[2] = direction.y;
+		directionArray[0] = -direction.x;
+		directionArray[2] = -direction.y;
 		IntPtr directionPtr = ConverterClass.ConvertFloat3ToIntPtr(directionArray);
 		IntPtr type = ConverterClass.ConvertStringToByteToIntPtr("constant");
 		float[] positionArray = {0f,0f,0f};
@@ -87,9 +87,27 @@ public class Haptics : HapticClassScript {
 
 	bool sphere_grabbed = false; 
 	int active_event_id = -1;
+	bool prev_button_state_start = false;
 
 	void Update()
 	{
+		if ( main.state == Main.states.STARTSCREEN)
+		{
+			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
+			{
+				Debug.Log("asdf");
+				RaycastHit hit;
+				float[] position = ConverterClass.ConvertIntPtrToFloat3(PluginImport.GetProxyPosition());
+				if(Physics.Raycast(new Vector3(position[0], position[1], position[2]), Vector3.back, out hit))
+				{
+					Debug.Log(hit);
+				}
+			}
+			prev_button_state_start = PluginImport.GetButton1State();
+		}
+
+		
+
 		if (sphere_grabbed && (main.state == Main.states.INTRO || main.state == Main.states.TRAINING))
 		{
 			int old_active_event_id = active_event_id;
@@ -127,15 +145,16 @@ public class Haptics : HapticClassScript {
 		myGenericFunctionsClassScript.GetProxyValues();
 
 		myGenericFunctionsClassScript.GetTouchedObject();
+		
 	}
 
 	void OnDisable()
 	{
 		if (PluginImport.HapticCleanUp())
 		{
-			Debug.Log("Haptic Context CleanUp");
-			Debug.Log("Desactivate Device");
-			Debug.Log("OpenGL Context CleanUp");
+		//	Debug.Log("Haptic Context CleanUp");
+		//	Debug.Log("Desactivate Device");
+		//	Debug.Log("OpenGL Context CleanUp");
 		}
 	}
 

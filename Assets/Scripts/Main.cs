@@ -9,6 +9,7 @@ public class Main : MonoBehaviour {
 	public GameObject ground;
 	public Camera mainCamera;
 	public GameObject oculusCamera;
+	public GameObject environment;
 	public Canvas startscreen;
 	public states state;
 	static SphereMovement sphereScript;
@@ -35,7 +36,7 @@ public class Main : MonoBehaviour {
 		statistics = Statistics.Instance;
 		switchState(states.STARTSCREEN);
 		//DEBUG ONLY TODO 
-		startExperimentPressed();
+	//	startExperimentPressed();
 	}
 	
 	// Update is called once per frame
@@ -60,6 +61,7 @@ public class Main : MonoBehaviour {
 			startscreen.enabled = false;
 			goal.renderer.enabled = true;
 			ground.renderer.enabled = true;
+			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
 			break;
 		case states.STARTSCREEN:
@@ -67,18 +69,21 @@ public class Main : MonoBehaviour {
 			startscreen.enabled = true;
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = false;
+			environment.SetActive(false);
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
 			break;
 		case states.TESTING:
 			startscreen.enabled = false;
 			goal.renderer.enabled = true;
 			ground.renderer.enabled = true;
+			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
 			break;
 		case states.TRAINING:
 			startscreen.enabled = false;
 			goal.renderer.enabled = true;
 			ground.renderer.enabled = true;
+			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
 			break;
 		case states.END:
