@@ -7,6 +7,8 @@ public class Main : MonoBehaviour {
 	public GameObject helper;
 	public GameObject goal;
 	public GameObject ground;
+	public GameObject planeForPointer;
+	public GameObject planeForPointer2;
 	public Camera mainCamera;
 	public GameObject oculusCamera;
 	public GameObject environment;
@@ -57,6 +59,9 @@ public class Main : MonoBehaviour {
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = true;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
+				sphere.SetActive(false);
+			planeForPointer.SetActive(false);
+			planeForPointer2.SetActive(false);
 			Screen.showCursor = false;
 			break;
 		case states.INTRO:
@@ -65,6 +70,9 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
+			sphere.SetActive(true);
+			planeForPointer.SetActive(true);
+			planeForPointer2.SetActive(true);
 			Screen.showCursor = false;
 			break;
 		case states.STARTSCREEN:
@@ -74,6 +82,9 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = false;
 			environment.SetActive(false);
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
+			sphere.SetActive(false);
+			planeForPointer.SetActive(false);
+			planeForPointer2.SetActive(false);
 			Screen.showCursor = true;
 			break;
 		case states.TESTING:
@@ -82,6 +93,9 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
+			sphere.SetActive(true);
+			planeForPointer.SetActive(true);
+			planeForPointer2.SetActive(true);
 			Screen.showCursor = false;
 			break;
 		case states.TRAINING:
@@ -90,6 +104,9 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
+			sphere.SetActive(true);
+			planeForPointer.SetActive(true);
+			planeForPointer2.SetActive(true);
 			Screen.showCursor = false;
 			break;
 		case states.END:

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 using System.Runtime.InteropServices;
@@ -22,7 +23,7 @@ public class Haptics : HapticClassScript {
 	public float duration;
 	public float frequency;
 	public GameObject cursor;
-
+	public LineRenderer l;
 	//number of bins of different constant wind forces
 	public const uint wind_bins = 100;
 
@@ -92,28 +93,45 @@ public class Haptics : HapticClassScript {
 
 	void Update()
 	{
-//		if ( main.state == Main.states.STARTSCREEN)
-//		{	
-//			Vector3 positionV = cursor.transform.position;
-//			float[] orientation = ConverterClass.ConvertIntPtrToFloat3(PluginImport.GetProxyDirection());
-//			Vector3 orientationV = new Vector3(orientation[0], orientation[1], orientation[2]);
-////			Debug.DrawLine(positionV, positionV + 200 * orientationV);
-//			Debug.DrawRay(positionV, orientationV);
-//			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
-//			{
-//				Debug.Log("asdf");
-//				RaycastHit hit;
-//
-//
-//				//Debug.DrawLine(positionV, positionV + 30 *  orientationV);
-//
-////				if(Physics.Raycast(new Vector3(position[0], position[1], position[2]), Vector3.back, out hit))
-////				{
-////					Debug.Log(hit);
-////				}
-//			}
-//			prev_button_state_start = PluginImport.GetButton1State();
-	//	}
+
+		
+		PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
+		
+		myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
+		
+		PluginImport.RenderHaptic ();
+
+		myGenericFunctionsClassScript.GetProxyValues();
+		
+		myGenericFunctionsClassScript.GetTouchedObject();
+
+
+
+		if ( main.state == Main.states.STARTSCREEN)
+		{	
+			Vector3 positionV = cursor.transform.position;
+			double[] orientation = ConverterClass.ConvertIntPtrToDouble3(PluginImport.GetProxyDirection());
+			Vector3 orientationV = new Vector3((float)orientation[0], (float)orientation[1], (float)orientation[2]);
+			orientationV.Normalize();
+			l.enabled = true;
+			l.SetPosition(0, positionV);
+			l.SetPosition(1, positionV + 400 * orientationV);
+			Debug.Log (PointerEventData.position);
+			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
+			{
+				Debug.Log("asdf");
+				RaycastHit hit;
+				if(Physics.Raycast(positionV, orientationV, out hit))
+				{
+					Debug.Log(hit);
+				}
+			}
+			prev_button_state_start = PluginImport.GetButton1State();
+		}
+		else
+		{
+			l.enabled = false;
+		}
 
 		
 
@@ -143,15 +161,8 @@ public class Haptics : HapticClassScript {
 			ActivatingGrabbedObjectPropperties();
 		}
 
-		PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
-
-		myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
-
-		PluginImport.RenderHaptic ();
 		
-		myGenericFunctionsClassScript.GetProxyValues();
 
-		myGenericFunctionsClassScript.GetTouchedObject();
 		
 	}
 
