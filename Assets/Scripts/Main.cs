@@ -30,13 +30,14 @@ public class Main : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		logger = Logger.Instance;
 		sphereScript = sphere.GetComponent<SphereMovement>();
 		trials = Trials.Instance;
 		statistics = Statistics.Instance;
 		switchState(states.STARTSCREEN);
 		//DEBUG ONLY TODO 
-	//	startExperimentPressed();
+		//startExperimentPressed();
 	}
 	
 	// Update is called once per frame
@@ -56,6 +57,7 @@ public class Main : MonoBehaviour {
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = true;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
+			Screen.showCursor = false;
 			break;
 		case states.INTRO:
 			startscreen.enabled = false;
@@ -63,6 +65,7 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
+			Screen.showCursor = false;
 			break;
 		case states.STARTSCREEN:
 			Debug.Log("Startscreen");
@@ -71,6 +74,7 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = false;
 			environment.SetActive(false);
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
+			Screen.showCursor = true;
 			break;
 		case states.TESTING:
 			startscreen.enabled = false;
@@ -78,6 +82,7 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
+			Screen.showCursor = false;
 			break;
 		case states.TRAINING:
 			startscreen.enabled = false;
@@ -85,6 +90,7 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
 			sphereScript.SwitchState(SphereMovement.sphereStates.MOVING);
+			Screen.showCursor = false;
 			break;
 		case states.END:
 			startscreen.enabled = false;
@@ -92,6 +98,7 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = false;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
 			logger.CloseLogFile();
+			Screen.showCursor = false;
 			break;
 		}
 		state = newState;

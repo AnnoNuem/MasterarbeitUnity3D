@@ -21,6 +21,7 @@ public class Haptics : HapticClassScript {
 	public float[] directionArray = new float[3];
 	public float duration;
 	public float frequency;
+	public GameObject cursor;
 
 	//number of bins of different constant wind forces
 	public const uint wind_bins = 100;
@@ -91,20 +92,28 @@ public class Haptics : HapticClassScript {
 
 	void Update()
 	{
-		if ( main.state == Main.states.STARTSCREEN)
-		{
-			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
-			{
-				Debug.Log("asdf");
-				RaycastHit hit;
-				float[] position = ConverterClass.ConvertIntPtrToFloat3(PluginImport.GetProxyPosition());
-				if(Physics.Raycast(new Vector3(position[0], position[1], position[2]), Vector3.back, out hit))
-				{
-					Debug.Log(hit);
-				}
-			}
-			prev_button_state_start = PluginImport.GetButton1State();
-		}
+//		if ( main.state == Main.states.STARTSCREEN)
+//		{	
+//			Vector3 positionV = cursor.transform.position;
+//			float[] orientation = ConverterClass.ConvertIntPtrToFloat3(PluginImport.GetProxyDirection());
+//			Vector3 orientationV = new Vector3(orientation[0], orientation[1], orientation[2]);
+////			Debug.DrawLine(positionV, positionV + 200 * orientationV);
+//			Debug.DrawRay(positionV, orientationV);
+//			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
+//			{
+//				Debug.Log("asdf");
+//				RaycastHit hit;
+//
+//
+//				//Debug.DrawLine(positionV, positionV + 30 *  orientationV);
+//
+////				if(Physics.Raycast(new Vector3(position[0], position[1], position[2]), Vector3.back, out hit))
+////				{
+////					Debug.Log(hit);
+////				}
+//			}
+//			prev_button_state_start = PluginImport.GetButton1State();
+	//	}
 
 		
 
@@ -113,8 +122,6 @@ public class Haptics : HapticClassScript {
 			int old_active_event_id = active_event_id;
 			float windSpeed = ws.ComputeWindSpeed(sphere.transform.position);
 			active_event_id = (int) (windSpeed * wind_bins);
-			Debug.Log(active_event_id);	
-
 			if (active_event_id != old_active_event_id)
 			{
 				if (old_active_event_id != -1)

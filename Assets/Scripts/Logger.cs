@@ -46,8 +46,8 @@ public sealed class Logger
 
 	public void CreateLogFile()
 	{
-		filename = participantID + "_" + System.DateTime.Now + ".txt";
-		sw = new StreamWriter("bla.txt");
+		filename = "ReachOut3D " + participantID + "_" + System.DateTime.Now.ToString("dd_MM_yyyy__HH_mm_ss") + ".txt";
+		sw = new StreamWriter(filename);
 		string s = "ReachOut 3D Experiment\nSurname: " + surname + "\nPrename: " + prename + "\nAge: " + age + "" +
 			"\nGender: " + gender + "\nparticipantID: " + participantID
 		+ "\nDateTime: " + System.DateTime.Now + "\n\n";

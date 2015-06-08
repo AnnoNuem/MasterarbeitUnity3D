@@ -2,14 +2,14 @@ ReachOut 3D Experiment
 Surname: 
 Prename: NA
 Age: 0
-Gender: FEMALE
-participantID: asdf
-DateTime: 6/3/2015 4:31:54 PM
+Gender: MALE
+participantID: NA
+DateTime: 6/8/2015 2:46:53 PM
 
-6/3/2015 4:31:54 PM Trial List Created
+6/8/2015 2:46:53 PM Trial List Created
 Number of IntroTrials: 2
 Number of TrainingTrials: 2
 Number of Testing Trials: 2
 
-6/3/2015 4:31:54 PM New Block of INTRO trials.
-6/3/2015 4:31:54 PM New INTRO trial.
+6/8/2015 2:46:53 PM New Block of INTRO trials.
+6/8/2015 2:46:53 PM New INTRO trial.

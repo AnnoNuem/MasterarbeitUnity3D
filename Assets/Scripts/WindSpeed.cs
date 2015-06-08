@@ -39,6 +39,12 @@ public sealed class WindSpeed
 		return new Vector2(a[0],a[1]);
 	}
 
+	// computes wind force and multiplies wwith factor to adjust speed of sphere
+	public Vector2 ComputeWindForceForSphere(Vector3 position)
+	{
+		return ComputeWindForce(position) * Parameters.windForceForSphereFactor;
+	}
+
 	public float ComputeWindDirection(Vector3 position)
 	{
 		float[] a = GetXY(position);

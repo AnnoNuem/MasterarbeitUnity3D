@@ -11,17 +11,15 @@ public class StartMenue : MonoBehaviour {
 	public InputField participantId;
 	public Toggle male;
 	public Toggle female;
-	public ToggleGroup tg;
 	public GameObject helper;
 	Main main;
 	Logger log;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		main = helper.GetComponent<Main>();
 		log = Logger.Instance;
-//		tg.RegisterToggle(male);
-//		tg.RegisterToggle(female);
 		startExperiment.onClick.AddListener(() => { main.startExperimentPressed(); });
 		prename.onEndEdit.AddListener(preListener);
 		surname.onEndEdit.AddListener (surListener);
@@ -31,6 +29,7 @@ public class StartMenue : MonoBehaviour {
 		female.onValueChanged.AddListener(femaleListener);
 	
 	}
+
 
 	void preListener(string s)
 	{
@@ -66,12 +65,10 @@ public class StartMenue : MonoBehaviour {
 		if (v)
 		{
 			log.gender = Logger.genderEnum.MALE;
-			female.isOn = false;
 		}
 		else
 		{
 			log.gender = Logger.genderEnum.FEMALE;
-			female.isOn = true;
 		}
 	}
 
@@ -80,12 +77,10 @@ public class StartMenue : MonoBehaviour {
 		if (v)
 		{
 			log.gender = Logger.genderEnum.FEMALE;
-			male.isOn = false;
 		}
 		else
 		{
 			log.gender = Logger.genderEnum.MALE;
-			male.isOn = true;
 		}
 	}
 }
