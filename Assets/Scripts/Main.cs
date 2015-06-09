@@ -39,7 +39,7 @@ public class Main : MonoBehaviour {
 		statistics = Statistics.Instance;
 		switchState(states.STARTSCREEN);
 		//DEBUG ONLY TODO 
-		//startExperimentPressed();
+		startExperimentPressed();
 	}
 	
 	// Update is called once per frame

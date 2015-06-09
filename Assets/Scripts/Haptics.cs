@@ -23,6 +23,7 @@ public class Haptics : HapticClassScript {
 	public float duration;
 	public float frequency;
 	public GameObject cursor;
+	public SphereAudio sphereAudio;
 	public LineRenderer l;
 	//number of bins of different constant wind forces
 	public const uint wind_bins = 100;
@@ -116,7 +117,7 @@ public class Haptics : HapticClassScript {
 			l.enabled = true;
 			l.SetPosition(0, positionV);
 			l.SetPosition(1, positionV + 400 * orientationV);
-			Debug.Log (PointerEventData.position);
+//			Debug.Log (PointerEventData.position);
 			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
 			{
 				Debug.Log("asdf");
@@ -199,6 +200,7 @@ public class Haptics : HapticClassScript {
 				if (grabbedObjectName.Equals("Sphere"))
 				{
 					sphere_grabbed = true;
+					sphereAudio.Grab();
 				}
 			}
 			previousButtonState = true;
@@ -207,6 +209,7 @@ public class Haptics : HapticClassScript {
 		{
 			if(grabbedObjectName.Equals("Sphere")){
 				sphere_grabbed = false;
+				sphereAudio.Ungrap();
 				sm.SwitchState(SphereMovement.sphereStates.DROPPING);
 				grabbedObjectName = "";
 			}
