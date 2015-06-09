@@ -13,6 +13,7 @@ public class SphereMovement : MonoBehaviour {
 	public WindSpeed windSpeed;
 	public Trials trials;
 	public Statistics statistics;
+	public SphereAudio sphereAudio;
 	public enum sphereStates
 	{
 		HIDDEN,
@@ -112,6 +113,7 @@ public class SphereMovement : MonoBehaviour {
 	{	
 		if (state == sphereStates.DROPPING && col.gameObject == ground)
 		{
+			sphereAudio.Collission();
 			statistics.computeTrialStatistics(dropPosition, sphere.transform.position, goal.transform.position, positions);
 			positions.Clear();
 			sphere.rigidbody.useGravity = false;

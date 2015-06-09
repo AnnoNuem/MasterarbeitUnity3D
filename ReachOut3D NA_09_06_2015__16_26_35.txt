@@ -1,0 +1,15 @@
+ReachOut 3D Experiment
+Surname: NA
+Prename: NA
+Age: 0
+Gender: NA
+participantID: NA
+DateTime: 6/9/2015 4:26:35 PM
+
+6/9/2015 4:26:35 PM Trial List Created
+Number of IntroTrials: 2
+Number of TrainingTrials: 2
+Number of Testing Trials: 2
+
+6/9/2015 4:26:35 PM New Block of INTRO trials.
+6/9/2015 4:26:35 PM New INTRO trial.
