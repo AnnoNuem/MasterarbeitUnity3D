@@ -29,7 +29,7 @@ public sealed class Trials
 	private Vector3[] introPositions;
 	private Vector3[] trainingPositions;
 	private Vector3[] testingPositions;
-	private const double radiantIntro = Math.PI * degreeIntro / 180.0;
+	private const double radiantIntro = 0;//Math.PI * degreeIntro / 180.0;
 	private const double radiantTraining = Math.PI * degreeTraining / 180.0;
 	private const double radiantTesting = Math.PI * degreeTesting1 / 180.0;
 
@@ -48,17 +48,27 @@ public sealed class Trials
 		trialQueue = new Queue();	
 		logger = Logger.Instance;
 		introPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantIntro)*Parameters.goal_scale),
-			new Vector3(-(float)Math.Cos(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Sin(radiantIntro)*Parameters.goal_scale),
-			new Vector3((float)Math.Sin(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Cos(radiantIntro)*Parameters.goal_scale),
-			new Vector3(-(float)Math.Sin(radiantIntro)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Cos(radiantIntro)*Parameters.goal_scale)};
+			new Vector3((float)Math.Cos(radiantIntro+Math.PI/2 )*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantIntro+Math.PI/2)*Parameters.goal_scale),
+			new Vector3((float)Math.Cos(radiantIntro+Math.PI)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantIntro+Math.PI)*Parameters.goal_scale),
+			new Vector3((float)Math.Cos(radiantIntro+3*Math.PI/2)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantIntro+3*Math.PI/2)*Parameters.goal_scale)};
 		trainingPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTraining)*Parameters.goal_scale),
-			new Vector3(-(float)Math.Cos(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Sin(radiantTraining)*Parameters.goal_scale),
-			new Vector3((float)Math.Sin(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Cos(radiantTraining)*Parameters.goal_scale),
-			new Vector3(-(float)Math.Sin(radiantTraining)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Cos(radiantTraining)*Parameters.goal_scale)};
+			new Vector3((float)Math.Cos(radiantTraining+Math.PI/2 )*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTraining+Math.PI/2)*Parameters.goal_scale),
+			new Vector3((float)Math.Cos(radiantTraining+Math.PI)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTraining+Math.PI)*Parameters.goal_scale),
+			new Vector3((float)Math.Cos(radiantTraining+3*Math.PI/2)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTraining+3*Math.PI/2)*Parameters.goal_scale)};
 		testingPositions = new Vector3[4] {new Vector3((float)Math.Cos(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTesting)*Parameters.goal_scale),
-			new Vector3(-(float)Math.Cos(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Sin(radiantTesting)*Parameters.goal_scale),
-			new Vector3((float)Math.Sin(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Cos(radiantTesting)*Parameters.goal_scale),
-			new Vector3(-(float)Math.Sin(radiantTesting)*Parameters.goal_scale,Parameters.goal_height, -(float)Math.Cos(radiantTesting)*Parameters.goal_scale)};
+			new Vector3((float)Math.Cos(radiantTesting+Math.PI/2 )*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTesting+Math.PI/2)*Parameters.goal_scale),
+			new Vector3((float)Math.Cos(radiantTesting+Math.PI)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTesting+Math.PI)*Parameters.goal_scale),
+			new Vector3((float)Math.Cos(radiantTesting+3*Math.PI/2)*Parameters.goal_scale,Parameters.goal_height, (float)Math.Sin(radiantTesting+3*Math.PI/2)*Parameters.goal_scale)};
+
+		foreach (Vector3 v in introPositions){
+			Debug.Log (v);
+		}
+		foreach (Vector3 v in trainingPositions){
+			Debug.Log (v);
+		}
+		foreach (Vector3 v in testingPositions){
+			Debug.Log (v);
+		}
 	}
 	
 	public static Trials Instance

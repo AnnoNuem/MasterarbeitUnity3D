@@ -1,10 +1,13 @@
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 using System.Runtime.InteropServices;
 
-
+/// <summary>
+/// Haptics. Manages input of SensAble Haptic Device
+/// </summary>
 public class Haptics : HapticClassScript {
 
 
@@ -171,9 +174,6 @@ public class Haptics : HapticClassScript {
 	{
 		if (PluginImport.HapticCleanUp())
 		{
-		//	Debug.Log("Haptic Context CleanUp");
-		//	Debug.Log("Desactivate Device");
-		//	Debug.Log("OpenGL Context CleanUp");
 		}
 	}
 
