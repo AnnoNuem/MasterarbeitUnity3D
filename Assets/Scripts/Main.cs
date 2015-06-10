@@ -32,7 +32,6 @@ public class Main : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		logger = Logger.Instance;
 		sphereScript = sphere.GetComponent<SphereMovement>();
 		trials = Trials.Instance;

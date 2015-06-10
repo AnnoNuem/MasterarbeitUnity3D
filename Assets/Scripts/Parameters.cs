@@ -5,9 +5,9 @@
 	public const float fieldSizeZ = 0.8f;
 
 	//number of trials
-	public const int numberOfIntroTrials = 2;
-	public const int numberOfTrainingTrials = 2;
-	public const int numberOfTestingTrials = 2;
+	public const int numberOfIntroTrials = 4;
+	public const int numberOfTrainingTrials = 4;
+	public const int numberOfTestingTrials = 8;
 
 
 	//parameters goal

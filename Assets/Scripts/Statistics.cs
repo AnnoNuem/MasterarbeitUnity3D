@@ -59,9 +59,13 @@ public sealed class Statistics {
 
 	public void computeTrialStatistics(Vector3 dropPosition, Vector3 hitPosition, Vector3 goalPosition, List<Vector3> positions)
 	{
+		// compute distance between start position and drop position in order to normalize variance and accuracy
+		// start postion is 0,0
+		float distanceStartDrop = (float)Math.Sqrt(Math.Pow (dropPosition.x,2) + Math.Pow(dropPosition.z,2));
+		Debug.Log(distanceStartDrop);
 		numberOfTrialsInBlock++;
-		float accuracy = computeAccuracy(hitPosition, goalPosition);
-		float variance = computeVariance(dropPosition, positions);
+		float accuracy = computeAccuracy(hitPosition, goalPosition) / distanceStartDrop;
+		float variance = computeVariance(dropPosition, positions) / distanceStartDrop;
 		sumAccuracyInBlock+=accuracy;
 		sumVarianceInBlock+=variance;
 		logger.Write("Accuracy: " + accuracy + "\nVariance: " + variance + "\n");
