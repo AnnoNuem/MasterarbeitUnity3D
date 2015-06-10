@@ -23,6 +23,7 @@ public class Haptics : HapticClassScript {
 	public float duration;
 	public float frequency;
 	public GameObject cursor;
+	public StartMenue startMenue;
 	public SphereAudio sphereAudio;
 	public LineRenderer l;
 	//number of bins of different constant wind forces
@@ -37,7 +38,7 @@ public class Haptics : HapticClassScript {
 	}
 	
 
-	void Start()
+	public void Start()
 	{
 		ws = WindSpeed.Instance;
 		if(PluginImport.InitHapticDevice())
@@ -91,14 +92,14 @@ public class Haptics : HapticClassScript {
 	bool sphere_grabbed = false; 
 	int active_event_id = -1;
 	bool prev_button_state_start = false;
+	LayerMask mask = 5;
 
 	void Update()
-	{
-
+	{		
 		
-		PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
+		//PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
 		
-		myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
+		//myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
 		
 		PluginImport.RenderHaptic ();
 
@@ -117,14 +118,13 @@ public class Haptics : HapticClassScript {
 			l.enabled = true;
 			l.SetPosition(0, positionV);
 			l.SetPosition(1, positionV + 400 * orientationV);
-//			Debug.Log (PointerEventData.position);
 			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
 			{
-				Debug.Log("asdf");
 				RaycastHit hit;
 				if(Physics.Raycast(positionV, orientationV, out hit))
 				{
-					Debug.Log(hit);
+
+					startMenue.objectHit(hit.collider.gameObject);
 				}
 			}
 			prev_button_state_start = PluginImport.GetButton1State();
@@ -157,7 +157,7 @@ public class Haptics : HapticClassScript {
 		}
 
 
-		if(PluginImport.GetMode() == 1)
+		if(PluginImport.GetMode() == 1 && main.state != Main.states.STARTSCREEN)
 		{
 			ActivatingGrabbedObjectPropperties();
 		}

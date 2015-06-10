@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class StartMenue : MonoBehaviour {
 
@@ -27,7 +28,6 @@ public class StartMenue : MonoBehaviour {
 		participantId.onEndEdit.AddListener (pIDListener);
 		male.onValueChanged.AddListener(maleListener);
 		female.onValueChanged.AddListener(femaleListener);
-	
 	}
 
 
@@ -82,5 +82,28 @@ public class StartMenue : MonoBehaviour {
 		{
 			log.gender = Logger.genderEnum.MALE;
 		}
+
 	}
+
+	public void objectHit(GameObject g)
+	{
+		EventSystem.current.SetSelectedGameObject(g);
+		switch(g.name)
+		{
+		case "Start Experiment":
+			main.startExperimentPressed();
+			break;
+		case "Female":
+			female.isOn = true;
+			male.isOn = false;
+			femaleListener(true);
+			break;
+		case "Male":
+			female.isOn = false;
+			male.isOn = true;
+			maleListener(true);
+			break;
+		}
+	}
+
 }

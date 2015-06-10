@@ -12,12 +12,14 @@ public class Main : MonoBehaviour {
 	public Camera mainCamera;
 	public GameObject oculusCamera;
 	public GameObject environment;
+	public GameObject planeForCollissionWithSphere;
 	public Canvas startscreen;
 	public states state;
 	static SphereMovement sphereScript;
 	static Logger logger;
 	static Trials trials;
 	static Statistics statistics;
+
 
 
 	public enum states
@@ -37,8 +39,9 @@ public class Main : MonoBehaviour {
 		trials = Trials.Instance;
 		statistics = Statistics.Instance;
 		switchState(states.STARTSCREEN);
+
 		//DEBUG ONLY TODO 
-		startExperimentPressed();
+		//startExperimentPressed();
 	}
 	
 	// Update is called once per frame
@@ -47,10 +50,16 @@ public class Main : MonoBehaviour {
 		{
 			Application.Quit();
 		}	
+		if(Input.GetKeyDown(KeyCode.S))
+		{
+			startExperimentPressed();
+		}
+
 	}
 
 	void switchState(states newState)
 	{
+		Debug.Log(newState.ToString());
 		switch (newState)
 		{
 		case states.PAUSE:
@@ -58,13 +67,10 @@ public class Main : MonoBehaviour {
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = true;
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
-				sphere.SetActive(false);
-			planeForPointer.SetActive(false);
-			planeForPointer2.SetActive(false);
 			Screen.showCursor = false;
 			break;
 		case states.INTRO:
-			startscreen.enabled = false;
+
 			goal.renderer.enabled = true;
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
@@ -72,19 +78,21 @@ public class Main : MonoBehaviour {
 			sphere.SetActive(true);
 			planeForPointer.SetActive(true);
 			planeForPointer2.SetActive(true);
+			planeForCollissionWithSphere.SetActive(true);
 			Screen.showCursor = false;
+			startscreen.enabled = false;
 			break;
 		case states.STARTSCREEN:
-			Debug.Log("Startscreen");
 			startscreen.enabled = true;
 			goal.renderer.enabled = false;
 			ground.renderer.enabled = false;
 			environment.SetActive(false);
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
-			sphere.SetActive(false);
-			planeForPointer.SetActive(false);
-			planeForPointer2.SetActive(false);
-			Screen.showCursor = true;
+			//sphere.SetActive(false);
+			//planeForPointer.SetActive(false);
+			//planeForPointer2.SetActive(false);
+			planeForCollissionWithSphere.SetActive(false);
+			Screen.showCursor = false;
 			break;
 		case states.TESTING:
 			startscreen.enabled = false;
@@ -95,6 +103,7 @@ public class Main : MonoBehaviour {
 			sphere.SetActive(true);
 			planeForPointer.SetActive(true);
 			planeForPointer2.SetActive(true);
+			planeForCollissionWithSphere.SetActive(true);
 			Screen.showCursor = false;
 			break;
 		case states.TRAINING:
@@ -106,6 +115,7 @@ public class Main : MonoBehaviour {
 			sphere.SetActive(true);
 			planeForPointer.SetActive(true);
 			planeForPointer2.SetActive(true);
+			planeForCollissionWithSphere.SetActive(true);
 			Screen.showCursor = false;
 			break;
 		case states.END:
@@ -122,6 +132,7 @@ public class Main : MonoBehaviour {
 
 	public IEnumerator newTrial()
 	{
+		Debug.Log("bla");
 		Trials.typeOfTrial oldType = trials.currentTrial.type;
 		switchState(states.PAUSE);
 		yield return new WaitForSeconds(Parameters.pauseBetweenTrials);
@@ -156,10 +167,13 @@ public class Main : MonoBehaviour {
 
 	public void startExperimentPressed()
 	{
+
 		logger.CreateLogFile();
 		trials.CreateTrials();
 		logger.Write("\n" + System.DateTime.Now + " New Block of " + trials.currentTrial.type + " trials.\n");
-		logger.Write(System.DateTime.Now + " New " + trials.currentTrial.type + " trial.\n");  
-		switchState (states.INTRO);
+		logger.Write(System.DateTime.Now + " New " + trials.currentTrial.type + " trial.\n"); 
+		trials.NextTrial();
+		StartCoroutine("newTrial");
+		Debug.Log ("blabla");
 	}
 }

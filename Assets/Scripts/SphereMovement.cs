@@ -59,7 +59,6 @@ public class SphereMovement : MonoBehaviour {
 		switch (state)
 		{
 		case sphereStates.MOVING:
-			positions.Add(sphere.transform.position);
 			float x = Input.GetAxis ("L_XAxis_1"); 
 			float z = -Input.GetAxis ("L_YAxis_1");
 			Vector3 v = sphere.transform.position;
@@ -80,6 +79,7 @@ public class SphereMovement : MonoBehaviour {
 				v.z = Parameters.fieldSizeZ;
 			}
 			sphere.transform.position = v;
+			positions.Add(sphere.transform.position);
 			break;
 		}
 	}
