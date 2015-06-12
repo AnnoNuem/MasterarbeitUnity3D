@@ -1,3 +1,12 @@
+/**
+ * ReachOut 2D Experiment
+ * Axel Schaffland
+ * aschaffland@uos.de
+ * SS2015
+ * Neuroinformatics
+ * Institute of Cognitive Science
+ * University of Osnabrueck
+ **/
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +17,8 @@ using System.Runtime.InteropServices;
 /// <summary>
 /// Haptics. Manages input of SensAble Haptic Device
 /// </summary>
+// sensable does not support linear forces or a force changing over time. thus different bins 
+// which get activate depending on position of pointer
 public class Haptics : HapticClassScript {
 
 
@@ -31,10 +42,7 @@ public class Haptics : HapticClassScript {
 	public LineRenderer l;
 	//number of bins of different constant wind forces
 	public const uint wind_bins = 100;
-
-	
-	/*****************************************************************************/
-	
+		
 	void Awake()
 	{
 		myGenericFunctionsClassScript = transform.GetComponent<GenericFunctionsClass>();
@@ -46,12 +54,9 @@ public class Haptics : HapticClassScript {
 		ws = WindSpeed.Instance;
 		if(PluginImport.InitHapticDevice())
 		{
-		//	Debug.Log("OpenGL Context Launched");
-		//	Debug.Log("Haptic Device Launched");
-			
 			myGenericFunctionsClassScript.SetHapticWorkSpace();
 			myGenericFunctionsClassScript.GetHapticWorkSpace();
-			
+
 			PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
 			
 			PluginImport.SetMode(ModeIndex);
@@ -68,10 +73,9 @@ public class Haptics : HapticClassScript {
 
 		myGenericFunctionsClassScript.SetHapticGeometry();
 
-
-		// create 100 different constant effects which are activated depending on the position of the sphere and the cursur
-		// 99 is the strongest force and 0 the weakest wind force
-		// asuming that the wind is linear
+		// create different constant effects which are activated depending on the position of the sphere and the cursor
+		// higher numbers correspond to higer forces
+		// assumes wind is linear and wind direction is the same at all positions
 		Vector2 direction = ws.ComputeWindForce(sphere.transform.position);
 		direction.Normalize();
 		directionArray[0] = -direction.x;
@@ -95,14 +99,11 @@ public class Haptics : HapticClassScript {
 	bool sphere_grabbed = false; 
 	int active_event_id = -1;
 	bool prev_button_state_start = false;
-	LayerMask mask = 5;
-
 	void Update()
-	{		
+	{				
+		PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
 		
-		//PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
-		
-		//myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
+		myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
 		
 		PluginImport.RenderHaptic ();
 
@@ -111,7 +112,7 @@ public class Haptics : HapticClassScript {
 		myGenericFunctionsClassScript.GetTouchedObject();
 
 
-
+		// if startmenu active use haptic device as laser pointer pointing to the UI
 		if ( main.state == Main.states.STARTSCREEN)
 		{	
 			Vector3 positionV = cursor.transform.position;
@@ -121,12 +122,12 @@ public class Haptics : HapticClassScript {
 			l.enabled = true;
 			l.SetPosition(0, positionV);
 			l.SetPosition(1, positionV + 400 * orientationV);
+			// use raycasts to detect to which object the poiner pointed when button was pressed
 			if ( (prev_button_state_start != PluginImport.GetButton1State()) && PluginImport.GetButton1State())
 			{
 				RaycastHit hit;
 				if(Physics.Raycast(positionV, orientationV, out hit))
 				{
-
 					startMenue.objectHit(hit.collider.gameObject);
 				}
 			}
@@ -135,10 +136,9 @@ public class Haptics : HapticClassScript {
 		else
 		{
 			l.enabled = false;
-		}
+		}		
 
-		
-
+		// apply wind force to sphere if it is grabbed and the current trial is an intro or training trial
 		if (sphere_grabbed && (main.state == Main.states.INTRO || main.state == Main.states.TRAINING))
 		{
 			int old_active_event_id = active_event_id;
@@ -164,10 +164,6 @@ public class Haptics : HapticClassScript {
 		{
 			ActivatingGrabbedObjectPropperties();
 		}
-
-		
-
-		
 	}
 
 	void OnDisable()
@@ -179,8 +175,9 @@ public class Haptics : HapticClassScript {
 
 	bool previousButtonState = false;
 	string grabbedObjectName = "";
-
-	// If GameObject is grabbed
+	/// <summary>
+	/// If GameObject is grabbed
+	/// </summary>
 	void ActivatingGrabbedObjectPropperties(){
 		
 		GameObject grabbedObject;

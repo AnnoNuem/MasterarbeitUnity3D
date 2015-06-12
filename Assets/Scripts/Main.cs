@@ -1,6 +1,19 @@
-﻿using UnityEngine;
+﻿/**
+ * ReachOut 2D Experiment
+ * Axel Schaffland
+ * aschaffland@uos.de
+ * SS2015
+ * Neuroinformatics
+ * Institute of Cognitive Science
+ * University of Osnabrueck
+ **/
+
+using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Main. Handles the experiment. State Machine for different states of the game.
+/// </summary>
 public class Main : MonoBehaviour {
 	
 	public GameObject sphere;
@@ -32,31 +45,27 @@ public class Main : MonoBehaviour {
 		END
 	}
 
-	// Use this for initialization
+
 	void Start () {
 		logger = Logger.Instance;
 		sphereScript = sphere.GetComponent<SphereMovement>();
 		trials = Trials.Instance;
 		statistics = Statistics.Instance;
+		// begin experiment with displaying the startscreen
 		switchState(states.STARTSCREEN);
-
-		//DEBUG ONLY TODO 
-		//startExperimentPressed();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape) && state == states.END)
 		{
 			Application.Quit();
 		}	
-		if(Input.GetKeyDown(KeyCode.S))
-		{
-			startExperimentPressed();
-		}
-
 	}
 
+	/// <summary>
+	/// Switchs the state of the experiment to "newState"
+	/// </summary>
+	/// <param name="newState">New state.</param>
 	void switchState(states newState)
 	{
 		Debug.Log(newState.ToString());
@@ -70,7 +79,6 @@ public class Main : MonoBehaviour {
 			Screen.showCursor = false;
 			break;
 		case states.INTRO:
-
 			goal.renderer.enabled = true;
 			ground.renderer.enabled = true;
 			environment.SetActive(true);
@@ -88,9 +96,6 @@ public class Main : MonoBehaviour {
 			ground.renderer.enabled = false;
 			environment.SetActive(false);
 			sphereScript.SwitchState(SphereMovement.sphereStates.HIDDEN);
-			//sphere.SetActive(false);
-			//planeForPointer.SetActive(false);
-			//planeForPointer2.SetActive(false);
 			planeForCollissionWithSphere.SetActive(false);
 			Screen.showCursor = false;
 			break;
@@ -139,12 +144,14 @@ public class Main : MonoBehaviour {
 		trials.NextTrial();
 		if (trials.currentTrial.type != Trials.typeOfTrial.END)
 		{
+			//if new block of traisl of other type compute statistics for previous trial block
 			if (oldType != trials.currentTrial.type)
 			{
 				statistics.computeBlockStatistics();
 				logger.Write("\n" + System.DateTime.Now + " New Block of " + trials.currentTrial.type + " trials.\n");
 			}
-			logger.Write(System.DateTime.Now + " New " + trials.currentTrial.type + " trial.\n");  
+			logger.Write(System.DateTime.Now + " New " + trials.currentTrial.type + " trial.\n");
+			//set position of the goal defined in the curernt trial
 			goal.transform.position = trials.currentTrial.position;
 		}
 		switch (trials.currentTrial.type){
