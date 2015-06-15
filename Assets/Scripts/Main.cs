@@ -137,7 +137,6 @@ public class Main : MonoBehaviour {
 
 	public IEnumerator newTrial()
 	{
-		Debug.Log("bla");
 		Trials.typeOfTrial oldType = trials.currentTrial.type;
 		switchState(states.PAUSE);
 		yield return new WaitForSeconds(Parameters.pauseBetweenTrials);
@@ -181,6 +180,5 @@ public class Main : MonoBehaviour {
 		logger.Write(System.DateTime.Now + " New " + trials.currentTrial.type + " trial.\n"); 
 		trials.NextTrial();
 		StartCoroutine("newTrial");
-		Debug.Log ("blabla");
 	}
 }

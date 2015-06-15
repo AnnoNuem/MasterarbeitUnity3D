@@ -40,6 +40,7 @@ public class Haptics : HapticClassScript {
 	public StartMenue startMenue;
 	public SphereAudio sphereAudio;
 	public LineRenderer l;
+	public float angle = -45;
 	//number of bins of different constant wind forces
 	public const uint wind_bins = 100;
 		
@@ -57,7 +58,7 @@ public class Haptics : HapticClassScript {
 			myGenericFunctionsClassScript.SetHapticWorkSpace();
 			myGenericFunctionsClassScript.GetHapticWorkSpace();
 
-			PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
+			PluginImport.UpdateWorkspace(angle);//myHapticCamera.transform.rotation.eulerAngles.y);
 			
 			PluginImport.SetMode(ModeIndex);
 
@@ -101,7 +102,7 @@ public class Haptics : HapticClassScript {
 	bool prev_button_state_start = false;
 	void Update()
 	{				
-		PluginImport.UpdateWorkspace(myHapticCamera.transform.rotation.eulerAngles.y);
+		PluginImport.UpdateWorkspace(angle);//myHapticCamera.transform.rotation.eulerAngles.y);
 		
 		myGenericFunctionsClassScript.UpdateGraphicalWorkspace();
 		
