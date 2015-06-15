@@ -1,11 +1,24 @@
-﻿using UnityEngine;
+﻿/**
+ * ReachOut 3D Experiment
+ * Axel Schaffland
+ * aschaffland@uos.de
+ * SS2015
+ * Neuroinformatics
+ * Institute of Cognitive Science
+ * University of Osnabrueck
+ **/
+ 
+ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
 
+/// <summary>
+/// Statistics. Class to compute statistics for trials and trialblocks
+/// </summary>
 public sealed class Statistics {
 
-	// singleton
+	// singleton functions and variables
 	private static readonly Statistics instance = new Statistics();
 
 	static Statistics()
@@ -42,7 +55,12 @@ public sealed class Statistics {
 		return (Math.Sqrt(Math.Pow ((a.x - b.x),2) + Math.Pow((a.z - b.z),2)));
 	}
 
-	//compute variance between straig line from start to drop position and actual path in order to define explorer exploider behaviour
+	/// <summary>
+	/// compute variance between straig line from start to drop position and actual path in order to define explorer exploider behaviour
+	/// </summary>
+	/// <returns>The variance.</returns>
+	/// <param name="dropPosition">Drop position.</param>
+	/// <param name="positions">Positions.</param>
 	private double computeVariance(Vector3 dropPosition, List<Vector3>positions)
 	{
 		//compute straight line between start and drop position
@@ -72,12 +90,9 @@ public sealed class Statistics {
 		numberOfTrialsInBlock++;
 		double accuracy = computeDistance(hitPosition, goalPosition) / distanceStartGoal;
 		double variance = computeVariance(dropPosition, positions) / distanceStartGoal;
-		Debug.Log(accuracy);
-		Debug.Log(variance);
 		sumAccuracyInBlock+=accuracy;
 		sumVarianceInBlock+=variance;
 		logger.Write("Accuracy: " + accuracy + "\nVariance: " + variance + "\n");
-
 	}
 
 	public void computeBlockStatistics()
