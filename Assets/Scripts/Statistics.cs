@@ -56,8 +56,8 @@ public sealed class Statistics {
 		}
 		foreach (Vector3 position in positions)
 		{
-			double k = ((position.x * dropPosition.x + position.z * dropPosition.z)/(Math.Pow(dropPosition.x,2) + Math.Pow(dropPosition.z,2)));
-			double distance = (Math.Sqrt(Math.Pow((k*dropPosition.x - position.x),2) + Math.Pow((k*dropPosition.z - position.z),2)));
+			double distanceStartDrop = computeDistance(Vector3.zero, dropPosition);
+			double distance = (Math.Abs(dropPosition.z * position.x - dropPosition.x * position.z) / distanceStartDrop);
 			sumDistances+= distance;
 			i++;
 		}
