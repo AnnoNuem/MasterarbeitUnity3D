@@ -38,8 +38,8 @@ public sealed class WindSpeed
 
 	private float[] GetXY(Vector3 position)
 	{
-		float x = (position[0] / (Parameters.fieldSizeX * 2f) + Parameters.fieldSizeX/2f) * Parameters.xscale;
-		float z = (position[2] / (Parameters.fieldSizeZ * 2f) + Parameters.fieldSizeZ/2f) * Parameters.zscale;
+		float x = (position[0] / (Parameters.fieldSizeX * 2f) + Parameters.fieldSizeX) * Parameters.xscale;
+		float z = (position[2] / (Parameters.fieldSizeZ * 2f) + Parameters.fieldSizeZ) * Parameters.zscale;
 		float[] a = {x,z};
 		return a;
 	}
