@@ -1,5 +1,5 @@
 ﻿/**
- * ReachOut 2D Experiment
+ * ReachOut 3D Experiment
  * Axel Schaffland
  * aschaffland@uos.de
  * SS2015
@@ -31,6 +31,8 @@ public sealed class Trials
 	public struct trial{
 		public typeOfTrial type;
 		public Vector3 position;
+		public string text;
+		public float displaytime;
 	}
 	
 	private Queue trialQueue;
@@ -78,36 +80,61 @@ public sealed class Trials
 	public void CreateTrials()
 	{
 		//intro trials
-		for (int i = 0; i < Parameters.numberOfIntroTrials; i++)
+		for (int i = 0; i <= Parameters.numberOfIntroTrials; i++)
 		{
 			trial t;
+			t.text = "Introduction\n\nMove the wooden pointer to the silver sphere.\nPress the lower button to grab the silver sphere.\nMove the silver sphere above the red mark.\n Drop the silver sphere by releasing the button.\n" +
+				"Try to hit the red sphere exactly.\n You may notice that the silver sphere is drifting if it is dropped.\nThis is due to wind.\nYou feel a force if you grab the silver sphere.\nIt tells you from where and how strong the wind is.\n\n";
+			t.displaytime = float.MaxValue;
 			t.type = typeOfTrial.INTRO;
 			// randomly select a position from the positions list
 			t.position = introPositions[UnityEngine.Random.Range(0, introPositions.Length)];
 			trialQueue.Enqueue(t);
 		}
-
-		//training trials
-		for (int i = 0; i < Parameters.numberOfTrainingTrials; i++)
+		
+		//create superblocks of training trials followed by testing trials
+		for (int i = 0; i < Parameters.numberOfRepetitions; i++)
 		{
-			trial t;
-			t.type = typeOfTrial.TRAINING;
-			t.position = trainingPositions[UnityEngine.Random.Range(0, trainingPositions.Length)];
-			trialQueue.Enqueue(t);
-		}
-
-		// testing trials
-		for (int i = 0; i < Parameters.numberOfTestingTrials; i++)
-		{
-			trial t;
-			t.type = typeOfTrial.TESTING;
-			t.position = testingPositions[UnityEngine.Random.Range(0, testingPositions.Length)];
-			trialQueue.Enqueue(t);
+			//training trials
+			for (int j = 0; j < Parameters.numberOfTrainingTrials; j++)
+			{
+				trial t;
+				t.text = "";
+				t.displaytime = 0;
+				if (j == 0)
+				{
+					t.text = "Training trials.\n\nThe force you are feeling is the wind.\nThe wind influences the silver sphere if it is dropped\nTry to hit the red mark exactly.\n\n" +
+						"This text will disappear in 20 seconds.";
+					t.displaytime = 20;
+				}
+				t.type = typeOfTrial.TRAINING;
+				t.position = trainingPositions[UnityEngine.Random.Range(0, trainingPositions.Length)];
+				trialQueue.Enqueue(t);
+			}
+			
+			// testing trials
+			for (int j = 0; j < Parameters.numberOfTestingTrials; j++)
+			{
+				trial t;
+				t.text = "";
+				t.displaytime = 0;
+				if (j == 0)
+				{
+					t.text = "Testing trials.\n\nNo force is indicating wind speed and direction.\nThe silver sphere is still influenced by the same wind as in previous trials if it is droped.\nTry to hit the red sphere exactly.\n\n" +
+						"This text will disappear in 10 seconds.";
+					t.displaytime = 20;
+				}
+				t.type = typeOfTrial.TESTING;
+				t.position = testingPositions[UnityEngine.Random.Range(0, testingPositions.Length)];
+				trialQueue.Enqueue(t);
+			}
 		}
 
 		//trial indicating the end of the experiment
 		trial tEnd;
 		tEnd.type = typeOfTrial.END;
+		tEnd.text = "Well Done.\n\nThe experiment is over.\nThank you for your participation.";
+		tEnd.displaytime = float.MaxValue;
 		tEnd.position = Vector3.zero;
 		trialQueue.Enqueue(tEnd);
 		// write information about trial creation into log file
