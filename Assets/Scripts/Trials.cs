@@ -33,6 +33,8 @@ public sealed class Trials
 		public Vector3 position;
 		public string text;
 		public float displaytime;
+		public float windScaleX;
+		public float windScaleZ;
 	}
 	
 	private Queue trialQueue;
@@ -83,6 +85,8 @@ public sealed class Trials
 		for (int i = 0; i <= Parameters.numberOfIntroTrials; i++)
 		{
 			trial t;
+			t.windScaleX = Parameters.windScaleXIntro;
+			t.windScaleZ = Parameters.windScaleZIntro;
 			t.text = "Introduction\n\nMove the wooden pointer to the silver sphere.\nPress the lower button to grab the silver sphere.\nMove the silver sphere above the red mark.\n Drop the silver sphere by releasing the button.\n" +
 				"Try to hit the red mark exactly.\n You may notice that the silver sphere is drifting if it is dropped.\nThis is due to wind.\nYou feel a force if you grab the silver sphere.\nIt tells you from where and how strong the wind is.\n\n";
 			t.displaytime = float.MaxValue;
@@ -99,6 +103,18 @@ public sealed class Trials
 			for (int j = 0; j < Parameters.numberOfTrainingTrials; j++)
 			{
 				trial t;
+				t.windScaleX = Parameters.windScaleXTraining0;
+				t.windScaleZ = Parameters.windScaleZTraining0;
+				if (i == 1)
+				{
+					t.windScaleX = Parameters.windScaleXTraining1;
+					t.windScaleZ = Parameters.windScaleZTraining1;
+				}
+				if (i == 2)
+				{
+					t.windScaleX = Parameters.windScaleXTraining2;
+					t.windScaleZ = Parameters.windScaleZTraining2;
+				}
 				t.text = "";
 				t.displaytime = 0;
 				if (j == 0)
@@ -116,6 +132,18 @@ public sealed class Trials
 			for (int j = 0; j < Parameters.numberOfTestingTrials; j++)
 			{
 				trial t;
+				t.windScaleX = Parameters.windScaleXTesting0;
+				t.windScaleZ = Parameters.windScaleZTesting0;
+				if (i == 1)
+				{
+					t.windScaleX = Parameters.windScaleXTesting1;
+					t.windScaleZ = Parameters.windScaleZTesting1;
+				}
+				if (i == 2)
+				{
+					t.windScaleX = Parameters.windScaleXTesting2;
+					t.windScaleZ = Parameters.windScaleZTesting2;
+				}
 				t.text = "";
 				t.displaytime = 0;
 				if (j == 0)
@@ -132,6 +160,8 @@ public sealed class Trials
 
 		//trial indicating the end of the experiment
 		trial tEnd;
+		tEnd.windScaleX = 0;
+		tEnd.windScaleZ = 0;
 		tEnd.type = typeOfTrial.END;
 		tEnd.text = "Well Done.\n\nThe experiment is over.\nThank you for your participation.";
 		tEnd.displaytime = float.MaxValue;

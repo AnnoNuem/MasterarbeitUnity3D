@@ -34,6 +34,7 @@ public class Main : MonoBehaviour {
 	static Trials trials;
 	static Statistics statistics;
 	public Text text;
+	public Haptics haptics;
 
 
 
@@ -153,6 +154,10 @@ public class Main : MonoBehaviour {
 			//if new block of traisl of other type compute statistics for previous trial block
 			if (oldType != trials.currentTrial.type)
 			{
+				if ( trials.currentTrial.type == Trials.typeOfTrial.TRAINING)
+				{
+					haptics.computeWindForces();
+				}
 				statistics.computeBlockStatistics();
 				logger.Write("\n" + System.DateTime.Now + " New Block of " + trials.currentTrial.type + " trials.\n");
 			}
@@ -186,6 +191,7 @@ public class Main : MonoBehaviour {
 		logger.Write("\n" + System.DateTime.Now + " New Block of " + trials.currentTrial.type + " trials.\n");
 		logger.Write(System.DateTime.Now + " New " + trials.currentTrial.type + " trial.\n"); 
 		trials.NextTrial();
+		haptics.computeWindForces();
 		StartCoroutine("newTrial");
 	}
 

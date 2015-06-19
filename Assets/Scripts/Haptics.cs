@@ -42,7 +42,7 @@ public class Haptics : HapticClassScript {
 	public LineRenderer l;
 	public float angle = -45;
 	//number of bins of different constant wind forces
-	public const uint wind_bins = 100;
+	public const uint wind_bins = 50;
 		
 	void Awake()
 	{
@@ -74,28 +74,30 @@ public class Haptics : HapticClassScript {
 
 		myGenericFunctionsClassScript.SetHapticGeometry();
 
+		PluginImport.LaunchHapticEvent();
+	}
+
+	public void computeWindForces()
+	{
 		// create different constant effects which are activated depending on the position of the sphere and the cursor
 		// higher numbers correspond to higer forces
 		// assumes wind is linear and wind direction is the same at all positions
 		Vector2 direction = ws.ComputeWindForce(sphere.transform.position);
 		direction.Normalize();
-		directionArray[0] = -direction.x;
+		directionArray[0] = direction.x;
 		directionArray[2] = -direction.y;
+		Debug.Log(direction);
 		IntPtr directionPtr = ConverterClass.ConvertFloat3ToIntPtr(directionArray);
 		IntPtr type = ConverterClass.ConvertStringToByteToIntPtr("constant");
 		float[] positionArray = {0f,0f,0f};
 		IntPtr positionPtr = ConverterClass.ConvertFloat3ToIntPtr(positionArray);
-
+		
 		for (int i = 0; i < wind_bins; i++)
 		{
 			magnitude = ((float)i)/wind_bins;
 			PluginImport.SetEffect(type , i, gain, magnitude, duration, frequency, positionPtr, directionPtr);
 		}
-
-
-		PluginImport.LaunchHapticEvent();
 	}
-	
 
 	bool sphere_grabbed = false; 
 	int active_event_id = -1;
