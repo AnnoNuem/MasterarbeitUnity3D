@@ -92,6 +92,13 @@ public sealed class Statistics {
 		double variance = computeVariance(dropPosition, positions) / distanceStartGoal;
 		sumAccuracyInBlock+=accuracy;
 		sumVarianceInBlock+=variance;
+		string positionlist = "";
+		foreach (Vector3 position in positions)
+		{
+			positionlist += position.x + ", " + position.z + "; ";
+		}
+		positionlist += "\n";
+		logger.Write (positionlist);
 		logger.Write("Accuracy: " + accuracy + "\nVariance: " + variance + "\n");
 	}
 

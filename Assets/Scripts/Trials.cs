@@ -39,9 +39,9 @@ public sealed class Trials
 	private Vector3[] introPositions;
 	private Vector3[] trainingPositions;
 	private Vector3[] testingPositions;
-	private const double radiantIntro = Math.PI * Parameters.degreeIntro / 180.0;
-	private const double radiantTraining = Math.PI * Parameters.degreeTraining / 180.0;
-	private const double radiantTesting = Math.PI * Parameters.degreeTesting1 / 180.0;
+	private double radiantIntro = Math.PI * Parameters.degreeIntro / 180.0;
+	private double radiantTraining = Math.PI * Parameters.degreeTraining / 180.0;
+	private double radiantTesting = Math.PI * Parameters.degreeTesting1 / 180.0;
 
 	// singleton variables and functions
 	private static readonly Trials instance = new Trials();
@@ -84,7 +84,7 @@ public sealed class Trials
 		{
 			trial t;
 			t.text = "Introduction\n\nMove the wooden pointer to the silver sphere.\nPress the lower button to grab the silver sphere.\nMove the silver sphere above the red mark.\n Drop the silver sphere by releasing the button.\n" +
-				"Try to hit the red sphere exactly.\n You may notice that the silver sphere is drifting if it is dropped.\nThis is due to wind.\nYou feel a force if you grab the silver sphere.\nIt tells you from where and how strong the wind is.\n\n";
+				"Try to hit the red mark exactly.\n You may notice that the silver sphere is drifting if it is dropped.\nThis is due to wind.\nYou feel a force if you grab the silver sphere.\nIt tells you from where and how strong the wind is.\n\n";
 			t.displaytime = float.MaxValue;
 			t.type = typeOfTrial.INTRO;
 			// randomly select a position from the positions list
@@ -120,7 +120,7 @@ public sealed class Trials
 				t.displaytime = 0;
 				if (j == 0)
 				{
-					t.text = "Testing trials.\n\nNo force is indicating wind speed and direction.\nThe silver sphere is still influenced by the same wind as in previous trials if it is droped.\nTry to hit the red sphere exactly.\n\n" +
+					t.text = "Testing trials.\n\nNo force is indicating wind speed and direction.\nThe silver sphere is still influenced by the same wind as in previous trials if it is droped.\nTry to hit the red mark exactly.\n\n" +
 						"This text will disappear in 10 seconds.";
 					t.displaytime = 20;
 				}

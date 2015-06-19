@@ -47,6 +47,10 @@ public class Main : MonoBehaviour {
 		END
 	}
 
+	void Awake ()
+	{
+		Parameters.readParameters();
+	}
 
 	void Start () {
 		logger = Logger.Instance;
@@ -187,7 +191,6 @@ public class Main : MonoBehaviour {
 
 	IEnumerator displayText(string t, float length)
 	{
-		Debug.Log(t);
 		text.text = t;
 		yield return new WaitForSeconds(length);
 		text.text = "";

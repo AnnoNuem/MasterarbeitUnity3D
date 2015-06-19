@@ -67,25 +67,10 @@ public class SphereMovement : MonoBehaviour {
 		switch (state)
 		{
 		case sphereStates.MOVING:
-//			Vector3 v = sphere.transform.position;
-//			if ( v.x < -Parameters.fieldSizeX )
-//			{
-//				v.x = -Parameters.fieldSizeX;
-//			}
-//			else if ( v.x > Parameters.fieldSizeX)
-//			{
-//				v.x = Parameters.fieldSizeX;
-//			}
-//			if ( v.z < -Parameters.fieldSizeZ )
-//			{
-//				v.z = -Parameters.fieldSizeZ;
-//			}
-//			else if ( v.z > Parameters.fieldSizeZ)
-//			{
-//				v.z = Parameters.fieldSizeZ;
-//			}
-//			sphere.transform.position = v;
-			positions.Add(sphere.transform.position);
+			if(sphere.transform.position.x != 0 && sphere.transform.position.z != 0)
+			{
+				positions.Add(sphere.transform.position);
+			}
 			break;
 		}
 	}
