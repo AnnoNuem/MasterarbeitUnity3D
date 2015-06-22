@@ -1,9 +1,9 @@
 ﻿fieldSizeX = 0.9
 fieldSizeZ = 0.9
 numberOfRepetitions = 3
-numberOfIntroTrials = 2
-numberOfTrainingTrials = 2
-numberOfTestingTrials = 2
+numberOfIntroTrials = 40	
+numberOfTrainingTrials = 30
+numberOfTestingTrials = 30
 degreeIntro = 0
 degreeTraining = 45
 degreeTesting1 = 22.5

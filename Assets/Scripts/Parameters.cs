@@ -73,7 +73,7 @@ public static class Parameters
 
 	public static void readParameters()
 	{
-		dic = File.ReadAllLines("CenterOut3DParameters.txt")
+		dic = File.ReadAllLines("ReachOut3DParameters.txt")
 		.Select(l => l.Split(new[] { '=' }))
 			.ToDictionary( s => s[0].Trim(), s => s[1].Trim());
 
