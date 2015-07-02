@@ -148,8 +148,8 @@ public sealed class Trials
 				t.displaytime = 0;
 				if (j == 0)
 				{
-					t.text = "Testing trials.\n\nNo force is indicating wind speed and direction.\nThe silver sphere is still influenced by the same wind as in previous trials if it is droped.\nTry to hit the red mark exactly.\n\n" +
-						"This text will disappear in 10 seconds.";
+					t.text = "Testing trials.\n\nNo force is indicating wind speed and direction.\nThe silver sphere is still influenced by the same wind as in previous trials if it is dropped.\nTry to hit the red mark exactly.\n\n" +
+						"This text will disappear in 20 seconds.";
 					t.displaytime = 20;
 				}
 				t.type = typeOfTrial.TESTING;
@@ -168,7 +168,7 @@ public sealed class Trials
 		tEnd.position = Vector3.zero;
 		trialQueue.Enqueue(tEnd);
 		// write information about trial creation into log file
-		logger.Write(System.DateTime.Now + " Trial List Created\nNumber of IntroTrials: " + Parameters.numberOfIntroTrials +
+		logger.Write(System.DateTime.Now + " Trial List Created\nNumberOfSuperblocks: " + Parameters.numberOfRepetitions + "\nNumber of IntroTrials: " + Parameters.numberOfIntroTrials +
 		             "\nNumber of TrainingTrials: " + Parameters.numberOfTrainingTrials + "\nNumber of Testing Trials: " +
 		             Parameters.numberOfTestingTrials + "\n");
 	}

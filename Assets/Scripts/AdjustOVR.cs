@@ -51,10 +51,10 @@ public class AdjustOVR : MonoBehaviour {
 			}
 			
 			if (Input.GetKey ("up")) {
-				transform.localRotation = new Quaternion(transform.localRotation.x - 0.01f,transform.localRotation.y,transform.localRotation.z,transform.localRotation.w);
+				transform.localRotation = new Quaternion(transform.localRotation.x + 0.01f,transform.localRotation.y,transform.localRotation.z,transform.localRotation.w);
 			}
 			if (Input.GetKey ("down")) {
-				transform.localRotation = new Quaternion(transform.localRotation.x + 0.01f,transform.localRotation.y,transform.localRotation.z,transform.localRotation.w);
+				transform.localRotation = new Quaternion(transform.localRotation.x - 0.01f,transform.localRotation.y,transform.localRotation.z,transform.localRotation.w);
 			}
 			if (Input.GetKey ("left")) {
 				transform.localRotation = new Quaternion(transform.localRotation.x,transform.localRotation.y - 0.01f,transform.localRotation.z,transform.localRotation.w);
