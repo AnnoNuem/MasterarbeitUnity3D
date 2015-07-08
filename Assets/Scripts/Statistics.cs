@@ -86,10 +86,10 @@ public sealed class Statistics {
 	{
 		// compute distance between start position and goal position in order to normalize variance and accuracy
 		// start postion is 0,0
-		double distanceStartGoal = computeDistance(Vector3.zero, goalPosition);
+		//double distanceStartGoal = computeDistance(Vector3.zero, goalPosition);
 		numberOfTrialsInBlock++;
-		double accuracy = computeDistance(hitPosition, goalPosition) / distanceStartGoal;
-		double variance = computeVariance(dropPosition, positions) / distanceStartGoal;
+		double accuracy = computeDistance(hitPosition, goalPosition);// / distanceStartGoal;
+		double variance = computeVariance(dropPosition, positions);// / distanceStartGoal;
 		sumAccuracyInBlock+=accuracy;
 		sumVarianceInBlock+=variance;
 		string positionlist = "";

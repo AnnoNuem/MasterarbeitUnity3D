@@ -86,9 +86,18 @@ public class SphereMovement : MonoBehaviour {
 		{
 			case sphereStates.DROPPING:
 				dropPosition =sphere.transform.position;
+				// check if sphere should be hidden while dropping in testing trials
+				if (Parameters.hideDroppingSphere && trials.currentTrial.type == Trials.typeOfTrial.TESTING)
+				{
+					sphere.renderer.enabled = false;
+				}
+				else
+				{
+					sphere.renderer.enabled = true;
+				}
 				sphere.rigidbody.useGravity = true;
 				sphere.rigidbody.isKinematic = false;
-				sphere.renderer.enabled = true;
+
 				break;
 			case sphereStates.HIDDEN:
 				sphere.renderer.enabled = false;

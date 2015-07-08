@@ -29,3 +29,4 @@ windScaleZTraining2 = -1
 windForceForSphereFactor = 4
 dispayOfHit = 0.7
 pauseBetweenTrials = 0.3
+hideDroppingSphere = false

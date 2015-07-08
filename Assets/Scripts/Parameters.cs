@@ -69,6 +69,9 @@ public static class Parameters
 	//pause between trials with only ground visible
 	public static float pauseBetweenTrials;
 
+	// true if shoehre is shall be hidden while dropping during testing trials
+	public static bool hideDroppingSphere;
+
 	static Dictionary<string, string> dic;
 
 	public static void readParameters()
@@ -116,5 +119,7 @@ public static class Parameters
 		dispayOfHit = float.Parse(dic["dispayOfHit"]);
 
 		pauseBetweenTrials = float.Parse(dic["pauseBetweenTrials"]);
+
+		hideDroppingSphere = bool.Parse(dic["hideDroppingSphere"]);
 	}
 }
